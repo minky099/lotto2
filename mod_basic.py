@@ -58,7 +58,7 @@ class ModuleBasic(PluginModuleBase):
                     ret['modal'] += f"\n회차 : {data['buy']['round']}"
                 ret['title'] = "테스트1"
                 ret['data'] = data
-        ToolNotify.send_message("test", 'lotto', image_url=img_url)
+        ToolNotify.send_message("test", 'lotto')
         return jsonify(ret)
 
     def scheduler_function(self):
