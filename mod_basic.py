@@ -56,8 +56,9 @@ class ModuleBasic(PluginModuleBase):
                 ret['modal'] += f"\n가능 : {data['available_count']}건"
                 if 'buy' in data:
                     ret['modal'] += f"\n회차 : {data['buy']['round']}"
-                ret['title'] = "테스트"
+                ret['title'] = "테스트1"
                 ret['data'] = data
+        ToolNotify.send_message("test", 'lotto', image_url=img_url)
         return jsonify(ret)
 
     def scheduler_function(self):
