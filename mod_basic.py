@@ -58,7 +58,6 @@ class ModuleBasic(PluginModuleBase):
                     ret['modal'] += f"\n회차 : {data['buy']['round']}"
                 ret['title'] = "테스트1"
                 ret['data'] = data
-                stream = BytesIO(ret['history']['screen_shot'])
                 filepath = os.path.join(F.config['path_data'], 'tmp', f"proxy_{str(time.time())}.png")
                 img = Image.open(stream)
                 img.save(filepath)
