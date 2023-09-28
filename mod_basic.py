@@ -58,7 +58,6 @@ class ModuleBasic(PluginModuleBase):
                     ret['modal'] += f"\n회차 : {data['buy']['round']}"
                 ret['title'] = "테스트1"
                 ret['data'] = data
-        ToolNotify.send_message("test", 'lotto')
         return jsonify(ret)
 
     def scheduler_function(self):
@@ -124,9 +123,10 @@ class ModuleBasic(PluginModuleBase):
             img = Image.open(stream)
             img.save(filepath)
             img_url = SupportDiscord.discord_proxy_image_localfile(filepath)
-            ret['history']['screen_shot'] = base64.b64encode(filepath.getvalue()).decode() 
+            ret['history']['screen_shot'] = base64.b64encode(stream.getvalue()).decode() 
             ret['available_count'] = 5 - ret['history']['count']
             if mode == 'test_info':
+                ToolNotify.send_message("test", 'lotto', image_url=img_url)
                 return ret
             
             buy_data = self.get_buy_data()
