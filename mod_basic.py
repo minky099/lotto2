@@ -113,6 +113,7 @@ class ModuleBasic(PluginModuleBase):
     def do_action(self, mode="buy"):
         try:
             ret = {'status': None}
+            img_url2 = None
             lotto = DhLottery(P)
             lotto.driver_init(P.ModelSetting.get('driver_mode'), P.ModelSetting.get_bool('driver_local_headless'), P.ModelSetting.get('driver_remote_url'))
             lotto.login(P.ModelSetting.get('user_id'), P.ModelSetting.get('user_passwd'))
