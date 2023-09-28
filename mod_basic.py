@@ -114,7 +114,6 @@ class ModuleBasic(PluginModuleBase):
         try:
             ret = {'status': None}
             img_url = None
-            msg = '로또'
             lotto = DhLottery(P)
             lotto.driver_init(P.ModelSetting.get('driver_mode'), P.ModelSetting.get_bool('driver_local_headless'), P.ModelSetting.get('driver_remote_url'))
             lotto.login(P.ModelSetting.get('user_id'), P.ModelSetting.get('user_passwd'))
@@ -127,6 +126,7 @@ class ModuleBasic(PluginModuleBase):
             img_url = SupportDiscord.discord_proxy_image_localfile(filepath)
             ret['history']['screen_shot'] = base64.b64encode(stream.getvalue()).decode() 
             ret['available_count'] = 5 - ret['history']['count']
+            msg = img_url
             if mode == 'test_info':
                 ToolNotify.send_message(msg, 'lotto', image_url=img_url)
                 return ret
