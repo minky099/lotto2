@@ -124,7 +124,7 @@ class ModuleBasic(PluginModuleBase):
             img = Image.open(stream)
             img.save(filepath)
             img_url = SupportDiscord.discord_proxy_image_localfile(filepath)
-            ret['history']['screen_shot'] = base64.b64encode(stream.getvalue()).decode() 
+            ret['history']['screen_shot'] = base64.b64encode(filepath.getvalue()).decode() 
             ret['available_count'] = 5 - ret['history']['count']
             if mode == 'test_info':
                 return ret
