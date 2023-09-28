@@ -47,9 +47,9 @@ class ModuleBasic(PluginModuleBase):
         if command == 'test_info' or command == 'test_buy':
             data = self.do_action(mode=command)
             if data['status'] == 'fail':
-                ret['modal'] = d(data['data'])
+#                ret['modal'] = d(data['data'])
                 ret['title'] = '에러'
-                ret['data'] = data
+ #               ret['data'] = data
             else:
                 ret['modal'] = f"예치금 : {data['deposit']}"
                 ret['modal'] += f"\n이미 구입 : {data['history']['count']}건 (미추첨)"
