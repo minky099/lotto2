@@ -47,9 +47,9 @@ class ModuleBasic(PluginModuleBase):
         if command == 'test_info' or command == 'test_buy':
             data = self.do_action(mode=command)
             if data['status'] == 'fail':
-#                ret['modal'] = d(data['data'])
+                ret['modal'] = d(data['data'])
                 ret['title'] = '에러'
- #               ret['data'] = data
+                ret['data'] = data
             else:
                 ret['modal'] = f"예치금 : {data['deposit']}"
                 ret['modal'] += f"\n이미 구입 : {data['history']['count']}건 (미추첨)"
@@ -57,7 +57,7 @@ class ModuleBasic(PluginModuleBase):
                 if 'buy' in data:
                     ret['modal'] += f"\n회차 : {data['buy']['round']}"
                 ret['title'] = "테스트1"
-#                ret['data'] = data
+                ret['data'] = data
                 stream = BytesIO(ret['history']['screen_shot'])
                 filepath = os.path.join(F.config['path_data'], 'tmp', f"proxy_{str(time.time())}.png")
                 img = Image.open(stream)
@@ -127,6 +127,8 @@ class ModuleBasic(PluginModuleBase):
             stream = BytesIO(ret['history']['screen_shot'])
             img = Image.open(stream)
             img.save(stream, format='png')
+            ret['history']['screen_shot'] = base64.b64encode(stream.getvalue()).decode() 
+            ret['available_count'] = 5 - ret['history']['count']
             if mode == 'test_info':
                 return ret
             
