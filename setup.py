@@ -12,17 +12,6 @@ setting = {
                 'name': '설정',
             },
             {
-                'uri': 'basic/list',
-                'name': '구입목록',
-            },
-            {
-                'uri': 'manual',
-                'name': '매뉴얼',
-                'list': [
-                    {'uri': 'README.md', 'name': 'README.md'},
-                ]
-            },
-            {
                 'uri': 'log',
                 'name': '로그',
             },
