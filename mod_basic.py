@@ -58,6 +58,11 @@ class ModuleBasic(PluginModuleBase):
                     ret['modal'] += f"\n회차 : {data['buy']['round']}"
                 ret['title'] = "테스트1"
 #                ret['data'] = data
+                stream = BytesIO(ret['history']['screen_shot'])
+                filepath = os.path.join(F.config['path_data'], 'tmp', f"proxy_{str(time.time())}.png")
+                img = Image.open(stream)
+                img.save(filepath)
+                img_url = SupportDiscord.discord_proxy_image_localfile(filepath)
         ToolNotify.send_message("test", 'lotto', image_url=img_url)
         return jsonify(ret)
 
