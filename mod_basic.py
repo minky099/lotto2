@@ -125,9 +125,8 @@ class ModuleBasic(PluginModuleBase):
             img_url = SupportDiscord.discord_proxy_image_localfile(filepath2)
             ret['history']['screen_shot'] = base64.b64encode(stream.getvalue()).decode() 
             ret['available_count'] = 5 - ret['history']['count']
-            msg = img_url
             if mode == 'test_info':
-                ToolNotify.send_message(msg, 'lotto', image_url=img_url)
+                ToolNotify.send_message(img_url, 'lotto', image_url=img_url)
                 return ret
             
             buy_data = self.get_buy_data()
