@@ -124,14 +124,9 @@ class ModuleBasic(PluginModuleBase):
             lotto.login(P.ModelSetting.get('user_id'), P.ModelSetting.get('user_passwd'))
             ret['deposit'] = lotto.check_deposit()
             ret['history'] = lotto.check_history()
-                       
             stream = BytesIO(ret['history']['screen_shot'])
-            filepath = os.path.join(F.config['path_data'], 'tmp', f"proxy_{str(time.time())}.png")
             img = Image.open(stream)
-            img.save(filepath)
-            img_url = SupportDiscord.discord_proxy_image_localfile(filepath)
-            ret['history']['screen_shot'] = base64.b64encode(stream.getvalue()).decode() 
-            ret['available_count'] = 5 - ret['history']['count']
+            img.save(stream, format='png')
             if mode == 'test_info':
                 return ret
             
