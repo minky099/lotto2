@@ -126,7 +126,7 @@ class ModuleBasic(PluginModuleBase):
             ret['history']['screen_shot'] = base64.b64encode(stream.getvalue()).decode() 
             ret['available_count'] = 5 - ret['history']['count']
             if mode == 'test_info':
-                ToolNotify.send_message("로또", 'lotto', image_url=img_url2)
+                ToolNotify.send_message("로또 당첨 확인", 'lotto', image_url=img_url2)
                 return ret
             
             buy_data = self.get_buy_data()
