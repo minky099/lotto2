@@ -57,7 +57,7 @@ class ModuleBasic(PluginModuleBase):
                 if 'buy' in data:
                     ret['modal'] += f"\n회차 : {data['buy']['round']}"
                 ret['title'] = "테스트1"
-                ret['data'] = data
+#                ret['data'] = data
         ToolNotify.send_message("test", 'lotto', image_url=img_url)
         return jsonify(ret)
 
@@ -135,8 +135,8 @@ class ModuleBasic(PluginModuleBase):
 #            stream = BytesIO(ret['history']['screen_shot'])
 #            img = Image.open(stream)
 #            img.save(stream, format='png')
-#            ret['history']['screen_shot'] = base64.b64encode(stream.getvalue()).decode() 
-#            ret['available_count'] = 5 - ret['history']['count']
+            ret['history']['screen_shot'] = base64.b64encode(stream.getvalue()).decode() 
+            ret['available_count'] = 5 - ret['history']['count']
             if mode == 'test_info':
                 return ret
             
