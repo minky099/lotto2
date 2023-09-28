@@ -58,7 +58,7 @@ class ModuleBasic(PluginModuleBase):
                     ret['modal'] += f"\n회차 : {data['buy']['round']}"
                 ret['title'] = "테스트1"
                 ret['data'] = data
-        ToolNotify.send_message(ret, 'lotto')
+        ToolNotify.send_message("test", 'lotto', image_url=img_url)
         return jsonify(ret)
 
     def scheduler_function(self):
@@ -119,6 +119,17 @@ class ModuleBasic(PluginModuleBase):
             lotto.login(P.ModelSetting.get('user_id'), P.ModelSetting.get('user_passwd'))
             ret['deposit'] = lotto.check_deposit()
             ret['history'] = lotto.check_history()
+                img_bytes = base64.b64decode(ret['history']['screen_shot'])
+                filepath = os.path.join(F.config['path_data'], 'tmp', f"proxy_{str(time.time())}.png")
+                img = Image.open(BytesIO(img_bytes))
+                img.save(filepath)
+                img_url = SupportDiscord.discord_proxy_image_localfile(filepath)
+                db_item = ModelLottoItem()
+                db_item.round = ret['buy']['round']
+                db_item.count = len(ret['buy']['buy_list'])
+                db_item.data = ret
+                db_item.img = img_url
+                db_item.save()
             stream = BytesIO(ret['history']['screen_shot'])
             img = Image.open(stream)
             img.save(stream, format='png')
